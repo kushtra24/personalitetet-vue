@@ -24,7 +24,7 @@ import QuestionsIndexViewVue from '@/views/admin/questions/QuestionsIndexView.vu
 import QuestionsSingleViewVue from '@/views/admin/questions/QuestionsSingleView.vue'
 import TypesEditViewVue from '@/views/admin/types/TypesEditView.vue'
 import TypesIndexViewVue from '@/views/admin/types/TypesIndexView.vue'
-import { isAuthenticatedStore } from '@/stores/authStore'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -163,7 +163,7 @@ const router = createRouter({
           component: TypesIndexViewVue
         }
       ]
-    }
+    },
   ]
 });
 

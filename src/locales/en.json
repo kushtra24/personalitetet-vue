@@ -4,6 +4,7 @@
   "types": "Types",
   "blog": "Blog",
   "login": "login",
+  "logout": "logout",
   "type": "Types",
   "test": "Test",
   "profile": "Profile",

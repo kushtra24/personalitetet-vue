@@ -1,6 +1,18 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import LogoComponent from './LogoComponent.vue';
+import { isAuthenticatedStore } from '@/stores/authStore'
+const authStore = isAuthenticatedStore();
 
+onMounted(() => {
+  if(authStore.isAuthenticated) {
+    console.log(authStore.isAuthenticated);
+  }
+});
+async function logout() {
+  document.cookie = "XSRF-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  authStore.authenticateUser(false);
+}
 </script>
 
 <template>
@@ -21,7 +33,8 @@ import LogoComponent from './LogoComponent.vue';
         <router-link :to="{ name: 'blog' }">{{ $t('blog') }}</router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'login' }">{{ $t('login') }}</router-link>
+        <router-link :to="{ name: 'login' }" v-if="!authStore.isAuthenticated">{{ $t('login') }}</router-link>
+        <router-link :to="{name: 'home'}" @click="logout" v-else>{{ $t('logout') }}</router-link>
       </li>
     </ul>
   </nav>
