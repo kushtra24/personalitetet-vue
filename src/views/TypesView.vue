@@ -2,6 +2,8 @@
 import { ref, onMounted } from 'vue';
 import type { PersonalityType } from '../types/PersonalityType';
 import axiosClient from '@/axiosClient';
+import { personalityTypesStore } from '@/stores/personalityTypesStore'
+const personalityTypes = personalityTypesStore();
 
 
 const organizationTypes = ref<Array<PersonalityType>>();
@@ -9,6 +11,25 @@ const selfTypes = ref<Array<PersonalityType>>();
 const friendsTypes = ref<Array<PersonalityType>>();
 const meetingTypes = ref<Array<PersonalityType>>();
 
+
+
+onMounted(() => {
+  // if types don't exist in store fetch them form the backend
+  if(!personalityTypes.types) {
+    axiosClient.get('api/personalityTypes')
+    .then((response) => {
+      personalityTypes.types = response.data;
+      if(personalityTypes.types?.length) {
+        setTypes(personalityTypes.types);
+      }
+    })
+    .catch((err) => {
+      console.log('Nope', err);
+    })
+  } else if(personalityTypes.types?.length) {
+    setTypes(personalityTypes.types);
+    }
+});
 function splitArray(array: Array<PersonalityType>, chunkSize: number) {
   const result = [];
   for (let i = 0; i < array.length; i += chunkSize) {
@@ -17,20 +38,13 @@ function splitArray(array: Array<PersonalityType>, chunkSize: number) {
   return result;
 }
 
-onMounted(() => {
-    axiosClient.get('api/personalityTypes')
-    .then((response) => {
-      const sections = splitArray(response.data, 4);
-
-      organizationTypes.value = sections[0];
-      selfTypes.value = sections[1];
-      friendsTypes.value = sections[2];
-      meetingTypes.value = sections[3];
-    })
-    .catch((err) => {
-      console.log('Nope', err);
-    })
-});
+function setTypes(types: Array<PersonalityType>) {
+  const sections = splitArray(types, 4); 
+  organizationTypes.value = sections[0];
+  selfTypes.value = sections[1];
+  friendsTypes.value = sections[2];
+  meetingTypes.value = sections[3];
+}
 
 </script>
 
