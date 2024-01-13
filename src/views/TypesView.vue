@@ -1,9 +1,36 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import type { PersonalityType } from '../types/PersonalityType';
+import axiosClient from '@/axiosClient';
 
 
-const personalityTypes = ref<PersonalityType>();
+const organizationTypes = ref<Array<PersonalityType>>();
+const selfTypes = ref<Array<PersonalityType>>();
+const friendsTypes = ref<Array<PersonalityType>>();
+const meetingTypes = ref<Array<PersonalityType>>();
+
+function splitArray(array: Array<PersonalityType>, chunkSize: number) {
+  const result = [];
+  for (let i = 0; i < array.length; i += chunkSize) {
+    result.push(array.slice(i, i + chunkSize));
+  }
+  return result;
+}
+
+onMounted(() => {
+    axiosClient.get('api/personalityTypes')
+    .then((response) => {
+      const sections = splitArray(response.data, 4);
+
+      organizationTypes.value = sections[0];
+      selfTypes.value = sections[1];
+      friendsTypes.value = sections[2];
+      meetingTypes.value = sections[3];
+    })
+    .catch((err) => {
+      console.log('Nope', err);
+    })
+});
 
 </script>
 
@@ -20,67 +47,47 @@ const personalityTypes = ref<PersonalityType>();
 
       <div id="organize" class="type-group row">
         <h1><strong>{{$t('organization')}}</strong></h1>
-
-        <!-- <div class="col-md-3 the-type" v-for="personalityType in personalityTypes" :key="personalityType.id">
-          <router-link :to="{ name: 'type', params: {type: personalityType.type} }">
-            <img :src="`public/images/${personalityType.type_img}`" :alt="`tipi-${personalityType.name}`">
+        <div class="col-md-3 the-type" v-for="personalityType in organizationTypes" :key="personalityType.id">
+          <router-link :to="{ path: 'type/' + personalityType.type, }">
+            <img :src="`public/${personalityType.type_img}`" :alt="`tipi-${personalityType.name}`">
             <h4>{{ personalityType.name }}</h4>
             <h5>{{ personalityType.type }}</h5>
           </router-link>
-        </div> -->
-
-
+        </div>
       </div>
 
       <div id="vetvetja" class="type-group row">
         <h1><strong>{{$t('self')}}</strong></h1>
-
-
-        
-        <!-- <div class="col-md-3 the-type">
-          <a href="{{ action('TipetController@show', [$tipi]) }}">
-            <img src="{{ $tipi->hasMedia('tipiImg') ? $tipi->firstMedia('tipiImg')->getUrl() : $tipi->type_img }}"
-              alt="tipi">
-              <h4>{{ personalityType.name }}</h4>
+        <div class="col-md-3 the-type" v-for="personalityType in selfTypes" :key="personalityType.id">
+          <router-link :to="{ path: 'type/' + personalityType.type, }">
+            <img :src="`public/${personalityType.type_img}`" :alt="`tipi-${personalityType.name}`">
+            <h4>{{ personalityType.name }}</h4>
             <h5>{{ personalityType.type }}</h5>
-          </a>
-        </div> -->
-
-        
-
+          </router-link>
+        </div>
       </div>
 
       <div id="shoqeri" class="type-group row">
         <h1><strong>{{$t('friends')}}</strong></h1>
-
-
-        
-        <!-- <div class="col-md-3 the-type">
-          <a href="{{ action('TipetController@show', [$tipi]) }}">
-            <img src="{{ $tipi->hasMedia('tipiImg') ? $tipi->firstMedia('tipiImg')->getUrl() : $tipi->type_img }}"
-              alt="tipi">
-              <h4>{{ personalityType.name }}</h4>
+        <div class="col-md-3 the-type" v-for="personalityType in friendsTypes" :key="personalityType.id">
+          <router-link :to="{ path: 'type/' + personalityType.type, }">
+            <img :src="`public/${personalityType.type_img}`" :alt="`tipi-${personalityType.name}`">
+            <h4>{{ personalityType.name }}</h4>
             <h5>{{ personalityType.type }}</h5>
-          </a>
-        </div> -->
-
-        
+          </router-link>
+        </div>
 
       </div>
 
       <div id="mbledhje" class="type-group row">
         <h1><strong>{{$t('meeting')}}</strong></h1>
-        
-
-        <!-- <div class="col-md-3 the-type">
-          <a href="{{ action('TipetController@show', [$tipi]) }}">
-            <img src="{{ $tipi->hasMedia('tipiImg') ? $tipi->firstMedia('tipiImg')->getUrl() : $tipi->type_img }}"
-              alt="tipi">
-              <h4>{{ personalityType.name }}</h4>
+        <div class="col-md-3 the-type" v-for="personalityType in meetingTypes" :key="personalityType.id">
+          <router-link :to="{ path: 'type/' + personalityType.type, }">
+            <img :src="`public/${personalityType.type_img}`" :alt="`tipi-${personalityType.name}`">
+            <h4>{{ personalityType.name }}</h4>
             <h5>{{ personalityType.type }}</h5>
-          </a>
-        </div> -->
-
+          </router-link>
+        </div>
 
       </div>
     </section>
