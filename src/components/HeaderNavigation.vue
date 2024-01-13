@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import LogoComponent from './LogoComponent.vue';
 
-
 </script>
 
 <template>

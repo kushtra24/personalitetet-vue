@@ -24,8 +24,7 @@ import QuestionsIndexViewVue from '@/views/admin/questions/QuestionsIndexView.vu
 import QuestionsSingleViewVue from '@/views/admin/questions/QuestionsSingleView.vue'
 import TypesEditViewVue from '@/views/admin/types/TypesEditView.vue'
 import TypesIndexViewVue from '@/views/admin/types/TypesIndexView.vue'
-
-
+import { isAuthenticatedStore } from '@/stores/authStore'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -48,7 +47,10 @@ const router = createRouter({
         {
           path: '/login',
           name: 'login',
-          component: LoginViewVue
+          component: LoginViewVue,
+          meta: {
+            public: true
+          },
         },
         {
           path: '/register',
@@ -111,6 +113,9 @@ const router = createRouter({
     {
       path: '/admin/',
       component: DefaultLayoutVue,
+      meta: {
+        needsAuth: true
+      },
       children: [
         {
           path: '/admin',
@@ -160,6 +165,24 @@ const router = createRouter({
       ]
     }
   ]
+});
+
+router.beforeEach((to, from, next) => {
+  const getCookie:Array<string> = document.cookie.split('=');
+  const xsrfToken = getCookie.filter(x => true)[0]
+  
+  if(to.meta.needsAuth && xsrfToken != 'XSRF-TOKEN') {
+    console.log('to to login');
+    next({name: 'login'});
+  }
+
+  if(to.meta.public && xsrfToken == 'XSRF-TOKEN') {
+    next({name: 'home'});
+    console.log('home');
+  }
+  
+  next();
+
 })
 
 export default router

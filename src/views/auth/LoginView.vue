@@ -1,38 +1,40 @@
 <script lang="ts" setup>
 import axiosClient from '@/axiosClient';
 import { onMounted } from 'vue';
-import { ref } from 'vue';
-import axios from "axios";
+import { ref, reactive } from 'vue';
+import { useRouter } from 'vue-router';
+//import bcrypt from 'bcryptjs';
+import type { UserType } from '@/types/UserType'
 
+
+
+const router = useRouter();
 const rightPanelActive = ref<boolean>(false);
-
+const loginError = ref<boolean>(false);
+const loading = ref<boolean>(false);
 onMounted(() => {
   rightPanelActive.value = false;
 });
 
-const form = ref({
-  email: null,
-  password: null,
+const form = reactive<UserType>({
+  email: '',
+  password: '',
 })
 
+
 async function onLogin() {
+  loading.value = true
   await axiosClient.get("sanctum/csrf-cookie");
   await axiosClient.post("api/login", {
-    email: form.value.email,
-    password: form.value.password
-  }).then((res: any)=> {
-    console.log('results: ', res);
-  }).catch((err: any) => {
-    console.log('error:', err);
+    email: form.email,
+    password: form.password //bcrypt.hashSync(, 12)
+  }).then(() => {
+    router.push("/");
+    loading.value = false
+  }).catch(() => {
+    loginError.value = true;
+    loading.value = false
   });
-
-  await axiosClient.get("api/user")
-  .then((user) => {
-    console.log('user:', user);
-  })
-  .catch((err) => {
-    console.log('errori: ', err);
-  })
 }
 
 </script>
@@ -42,12 +44,6 @@ async function onLogin() {
     <div class="form-container sign-up-container">
       <form @submit.prevent="">
         <h1>Create Account</h1>
-        <div class="social-container">
-          <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-          <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-        <span>or use your email for registration</span>
         <input type="text" placeholder="Name" />
         <input type="email" placeholder="Email" />
         <input type="password" placeholder="Password" />
@@ -57,16 +53,11 @@ async function onLogin() {
     <div class="form-container sign-in-container">
       <form @submit.prevent="onLogin">
         <h1>Sign in</h1>
-        <div class="social-container">
-          <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-          <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-        <span>or use your account</span>
+        <p v-if="loginError" class="text-red">{{ $t("authenticationFaild") }}</p>
         <input type="email" placeholder="Email" v-model="form.email" />
-        <input type="password" placeholder="Password" v-model="form.password"/>
+        <input type="password" placeholder="Password" v-model="form.password" />
         <a href="#">Forgot your password?</a>
-        <button type="submit" class="btn btn-primary">Sign In</button>
+        <button type="submit" class="btn btn-primary">Sign In <font-awesome-icon v-if="loading" :icon="['fas', 'spinner']" spin  /></button>
       </form>
     </div>
     <div class="overlay-container">
@@ -87,10 +78,10 @@ async function onLogin() {
 </template>
 
 <style scoped>
-
 button:hover {
   color: #00b1b3;
 }
+
 .container {
   background-color: #fff;
   border-radius: 10px;
@@ -252,4 +243,7 @@ input {
   width: 40px;
 }
 
+.text-red {
+  color: red;
+}
 </style>

@@ -14,5 +14,6 @@
   "organization": "Organizim",
   "self": "Vetvetja",
   "friends": "Shoqëri",
-  "meeting": "Mbledhje"
+  "meeting": "Mbledhje",
+  "authenticationFaild": "Kyqja nuk u realizua, jepeni të dhënat e sakta"
 }

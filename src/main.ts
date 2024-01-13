@@ -17,10 +17,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faComments, faUserTie } from '@fortawesome/free-solid-svg-icons'
+import { faComments, faUserTie, faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
-library.add(faComments, faUserTie)
+library.add(faComments, faUserTie, faSpinner);
 
 const i18n = createI18n({
   legacy: false, 

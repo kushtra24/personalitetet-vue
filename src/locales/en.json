@@ -14,5 +14,6 @@
   "organization": "Organization",
   "self": "Self",
   "friends": "Friends",
-  "meeting": "Meeting"
+  "meeting": "Meeting",
+  "authenticationFaild": "Authentication Faild, please check if the credentials are correct"
 }

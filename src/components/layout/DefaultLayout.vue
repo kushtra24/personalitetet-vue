@@ -1,7 +1,19 @@
 <script lang="ts" setup>
 import FooterNavigation from '../FooterNavigation.vue';
 import HeaderNavigation from '../HeaderNavigation.vue';
+import { isAuthenticatedStore } from '@/stores/authStore';
 
+const initialize = () => {
+  const getCookie:Array<string> = document.cookie.split('=');
+  const xsrfToken = getCookie.filter(x => true)[0]
+  const AuthStore = isAuthenticatedStore();
+
+  if(xsrfToken == 'XSRF-TOKEN') {
+    AuthStore.authenticateUser(true);
+  }
+};
+
+initialize();
 
 </script>
 
