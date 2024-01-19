@@ -30,3 +30,4 @@ initialize();
     <FooterNavigation />
   </footer>
 </template>
+@/stores/AuthStore

@@ -208,4 +208,4 @@ nav {
     }
   }
 }
-</style>
+</style>@/stores/AuthStore
