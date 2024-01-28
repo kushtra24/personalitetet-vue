@@ -27,6 +27,9 @@ export const AuthStore = defineStore('isAuthenticated', () => {
         authenticateUser(false);
       })
       .catch((err) => {
+        if(err.response.data.message === 'Unauthenticated.') {
+          authenticateUser(false);
+        }
         console.log('Error getting Auth user from server', err);
       })
   }

@@ -17,9 +17,9 @@ onMounted(() => {
 });
 
 const form = reactive<UserType>({
-email: '',
-password: '',
-verified: 0
+  email: '',
+  password: '',
+  verified: 0
 })
 
 
@@ -58,7 +58,8 @@ async function onLogin() {
         <input type="email" placeholder="Email" v-model="form.email" />
         <input type="password" placeholder="Password" v-model="form.password" />
         <a href="#">Forgot your password?</a>
-        <button type="submit" class="btn btn-primary">Sign In <font-awesome-icon v-if="loading" :icon="['fas', 'spinner']" spin  /></button>
+        <button type="submit" class="btn btn-primary">Sign In <font-awesome-icon v-if="loading" :icon="['fas', 'spinner']"
+            spin /></button>
       </form>
     </div>
     <div class="overlay-container">
