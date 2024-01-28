@@ -1,5 +1,5 @@
 export type UserType = {
-  'id'?: number
+  'id': number
 	"first_name"?: string
 	"last_name"?: string
 	"age"?: Date

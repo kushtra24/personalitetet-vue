@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { ref, onMounted, inject } from 'vue';
+import { ref, onMounted } from 'vue';
 import { AuthStore } from '@/stores/AuthStore';
 import type { UserType } from '@/types/UserType';
 import useDateFormatter from '@/composables/FormatDate';
 
-const injectedSubdomain = inject('subdomain', 'defaultSubdomain');
 const userStore = AuthStore();
 const user = ref<UserType | null>();
 const { formatDate } = useDateFormatter();
