@@ -1,17 +1,16 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import LogoComponent from './LogoComponent.vue';
-import { isAuthenticatedStore } from '@/stores/authStore'
-const authStore = isAuthenticatedStore();
+import { AuthStore } from '@/stores/AuthStore'
+const authStore = AuthStore();
 
 onMounted(() => {
   if(authStore.isAuthenticated) {
     console.log(authStore.isAuthenticated);
   }
 });
-async function logout() {
-  document.cookie = "XSRF-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  authStore.authenticateUser(false);
+const logout = async () => {
+  await authStore.logoutUser();
 }
 </script>
 

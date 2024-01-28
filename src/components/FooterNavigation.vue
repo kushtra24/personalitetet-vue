@@ -23,7 +23,7 @@ const counter = ref<Number>(5555);
                     <a href="#"><i class="fab fa-instagram fa-2x"></i></i></a>
                     <a href="#"><i class="fab fa-youtube-square fa-2x"></i></i></a> -->
         </div>
-        <a href="{{ route('testi') }}" class="btn btn-default footer-assesment-button">Fillo Vlersimin</a>
+        <router-link :to="{name: 'testPage'}" class="btn btn-default footer-assesment-button">Fillo Vlersimin</router-link>
       </div>
       <div class="col-md-3">
         <h4>
