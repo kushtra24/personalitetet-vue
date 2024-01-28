@@ -18,6 +18,11 @@ body {
   }
 }
 
+a {
+  color: #00b1b3;
+  text-decoration: none;
+}
+
 section{
 	margin: 38px 0;
 }
@@ -681,6 +686,22 @@ footer a:hover .fa-caret-right{
 	text-transform: uppercase;
 }
 
+.category-list-container {
+  display: inline;
+}
+
+.cateogry-item {
+  display: inline;
+  list-style: none;
+}
+
+.cateogry-item:after {
+  content: ", ";
+}
+
+.cateogry-item:last-child:after {
+  content: "";
+}
 
 
 
