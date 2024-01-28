@@ -176,19 +176,19 @@ const scrollToTop = () => {
               <div class="hidden-xs spajtohem-lg">{{ question.spajtohem }}</div>
             </div>
             <div class="col-md-6 circles">
-              <input type="radio" :id="question.id + 'option1'" class="left" title="Shumë"
+              <input :name="'q' + question.id" type="radio" :id="question.id + 'option1'" class="left" title="Shumë" value="-3"
                 @click="onRadiobutonClick(question.id || 0, -3)">
-              <input type="radio" :id="question.id + 'option2'" class="left" value="-2" title="Mesatarisht"
+              <input :name="'q' + question.id" type="radio" :id="question.id + 'option2'" class="left" value="-2" title="Mesatarisht"
                 @click="onRadiobutonClick(question.id || 0, -2)">
-              <input type="radio" :id="question.id + 'option3'" class="left" value="-1" title="Pak"
+              <input :name="'q' + question.id" type="radio" :id="question.id + 'option3'" class="left" value="-1" title="Pak"
                 @click="onRadiobutonClick(question.id || 0, -1)">
-              <input type="radio" :id="question.id + 'neotral1'" value="0" title="Neotral"
+              <input :name="'q' + question.id" type="radio" :id="question.id + 'neotral1'" value="0" title="Neotral"
                 @click="onRadiobutonClick(question.id || 0, 0)">
-              <input type="radio" :id="question.id + 'option1r'" class="right" value="1" title="Pak"
+              <input :name="'q' + question.id" type="radio" :id="question.id + 'option1r'" class="right" value="1" title="Pak"
                 @click="onRadiobutonClick(question.id || 0, 1)">
-              <input type="radio" :id="question.id + 'option2r'" class="right" value="2" title="Mesatarisht"
+              <input :name="'q' + question.id" type="radio" :id="question.id + 'option2r'" class="right" value="2" title="Mesatarisht"
                 @click="onRadiobutonClick(question.id || 0, 2)">
-              <input type="radio" :id="question.id + 'option3r'" class="right" value="3" title="Shumë"
+              <input :name="'q' + question.id" type="radio" :id="question.id + 'option3r'" class="right" value="3" title="Shumë"
                 @click="onRadiobutonClick(question.id || 0, 3)">
             </div>
             <div class="col-md-3 answer-lg">
