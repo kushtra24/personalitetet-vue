@@ -3,14 +3,16 @@ import BlankLayoutVue from '@/components/layout/BlankLayout.vue'
 import DefaultLayoutVue from '@/components/layout/DefaultLayout.vue'
 
 import AboutViewVue from '@/views/AboutView.vue'
-import BlogViewVue from '@/views/BlogView.vue'
+import BlogViewVue from '@/views/blog/BlogView.vue'
+import articleViewVue from '@/views/blog/articleView.vue'
 import FaqViewVue from '@/views/FaqView.vue'
 import HomeView from '../views/HomeView.vue'
-import ProfileViewVue from '@/views/ProfileView.vue'
-import TestResultViewVue from '@/views/TestResultView.vue'
-import TestViewVue from '@/views/TestView.vue'
-import TypesSingleViewVue from '@/views/TypesSingleView.vue'
-import TypesViewVue from '@/views/TypesView.vue'
+import ProfileViewVue from '@/views/profile/ProfileView.vue'
+import ProfileEditViewVue from '@/views/profile/ProfileEditView.vue'
+import TestResultViewVue from '@/views/test/TestResultView.vue'
+import TestViewVue from '@/views/test/TestView.vue'
+import TypesSingleViewVue from '@/views/personalityTypes/TypesSingleView.vue'
+import TypesViewVue from '@/views/personalityTypes/TypesView.vue'
 import LoginViewVue from '@/views/auth/LoginView.vue'
 import RegisterViewVue from '@/views/auth/RegisterView.vue'
 import ResetPasswordViewVue from '@/views/auth/ResetPasswordView.vue'
@@ -18,7 +20,6 @@ import ResetPasswordViewVue from '@/views/auth/ResetPasswordView.vue'
 import AdminViewVue from '@/views/admin/AdminView.vue'
 import CategoriesEditViewVue from '@/views/admin/categories/CategoriesEditView.vue'
 import CategoriesIndexViewVue from '@/views/admin/categories/CategoriesIndexView.vue'
-import ProfileEditViewVue from '@/views/admin/profile/ProfileEditView.vue'
 import QuestionsEditViewVue from '@/views/admin/questions/QuestionsEditView.vue'
 import QuestionsIndexViewVue from '@/views/admin/questions/QuestionsIndexView.vue'
 import QuestionsSingleViewVue from '@/views/admin/questions/QuestionsSingleView.vue'
@@ -79,19 +80,19 @@ const router = createRouter({
           component: TypesViewVue
         },
         {
-          path: '/blog',
+          path: '/blog/:currentPage?',
           name: 'blog',
           component: BlogViewVue
+        },
+        {
+          path: '/article/:articleTitle',
+          name: 'article',
+          component: articleViewVue
         },
         {
           path: '/faq',
           name: 'faqView',
           component: FaqViewVue
-        },
-        {
-          path: '/profile',
-          name: 'profileView',
-          component: ProfileViewVue
         },
         {
           path: '/test-result',
@@ -131,6 +132,11 @@ const router = createRouter({
           path: '/categories',
           name: 'categoriesIndexView',
           component: CategoriesIndexViewVue
+        },
+        {
+          path: '/profile',
+          name: 'profileView',
+          component: ProfileViewVue
         },
         {
           path: '/profile-edit',
