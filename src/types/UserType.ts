@@ -2,7 +2,7 @@ export type UserType = {
   'id'?: number
 	"first_name"?: string
 	"last_name"?: string
-	"age"?: number
+	"age"?: Date
 	"email": string
 	"password": string
 	"adresa"?: string
@@ -11,4 +11,7 @@ export type UserType = {
 	"vendlindja"?: string
 	"gjinia"?: string
 	"hobby"?: string
+  "created_at": Date
+  "verified": number
+  "type"?: string
 }

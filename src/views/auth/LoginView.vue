@@ -17,8 +17,9 @@ onMounted(() => {
 });
 
 const form = reactive<UserType>({
-  email: '',
-  password: '',
+email: '',
+password: '',
+verified: 0
 })
 
 
