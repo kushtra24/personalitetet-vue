@@ -1,12 +1,11 @@
 <script setup lang="ts">
+import MessageComponent from '@/components/MessageComponent.vue';
 </script>
 
 <template>
   <div class="container">
-
     <section id="heading-welcomepage">
       <h1>{{ $t('findYourPersonalityType') }}</h1>
-      
       <router-link :to="{ name: 'testPage'}" class="btn btn-primary">Fillo vlerësimin</router-link>
       <br>
       <img src="/images/homepage.png" class="img-responsive" alt="homepage image">

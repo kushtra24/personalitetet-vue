@@ -20,7 +20,7 @@ defineProps({
     },
   },
   icon: {
-    type: String
+    type: Array
   },
   loading: {
     type: Boolean,
