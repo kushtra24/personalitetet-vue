@@ -142,7 +142,6 @@ const scrollToTop = () => {
 
     <div class="center">
       <h1><b> Pyetsori i Personalitetit </b></h1>
-      {{ answers.length }}
       <div class="row">
         <div class="test-rules" style="margin: 40px 0">
           <div class="col-md-2 bounce col-md-offset-1"><i class="fas fa-ban fa-4x"></i>
